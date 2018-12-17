@@ -13,27 +13,27 @@ import redis.clients.jedis.Protocol;
 
 @Repository
 public class URLRepository {
-    private Jedis jedis;
+    private final Jedis jedis;
     private final String idKey;
     private final String urlKey;
+    private JedisPool pool;
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
     public URLRepository() {
     	
     	try {
     	    URI redisURI = new URI(System.getenv("REDISTOGO_URL"));
-    	    JedisPool pool = new JedisPool(new JedisPoolConfig(),
+    	    		pool = new JedisPool(new JedisPoolConfig(),
     	            redisURI.getHost(),
     	            redisURI.getPort(),
     	            Protocol.DEFAULT_TIMEOUT,
     	            redisURI.getUserInfo().split(":",2)[1]);
-            		this.jedis = pool.getResource();
-            		pool.close();
+            		
     	} catch (URISyntaxException e) {
     	    LOGGER.error("Failed to create redis pool");
-    	    this.jedis = new Jedis();
+    	    e.printStackTrace();
     	}
-    	
+    	this.jedis = pool.getResource();
         this.idKey = "id";
         this.urlKey = "url:";
     }
