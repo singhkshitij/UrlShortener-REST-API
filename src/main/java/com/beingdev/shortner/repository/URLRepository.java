@@ -2,9 +2,11 @@ package com.beingdev.shortner.repository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 @Repository
 public class URLRepository {
@@ -13,6 +15,9 @@ public class URLRepository {
     private final String urlKey;
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
+    @Autowired
+    private JedisPool pool;
+    
     public URLRepository() {
     	
     	this.jedis = new Jedis();
