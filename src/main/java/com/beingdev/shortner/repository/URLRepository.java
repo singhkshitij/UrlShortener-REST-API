@@ -16,13 +16,14 @@ public class URLRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
     @Autowired
-    private JedisPool pool;
+    JedisPool pool;
     
     public URLRepository() {
     	
     	this.jedis = pool.getResource();
         this.idKey = "id";
         this.urlKey = "url:";
+        pool.returnResource(jedis);
     }
 
     public URLRepository(Jedis jedis, String idKey, String urlKey) {
