@@ -34,6 +34,7 @@ public class URLRepository {
     	    e.printStackTrace();
     	}
     	this.jedis = pool.getResource();
+    	pool.close();
         this.idKey = "id";
         this.urlKey = "url:";
     }
