@@ -20,7 +20,7 @@ public class URLRepository {
     
     public URLRepository() {
     	
-    	this.jedis = new Jedis();
+    	this.jedis = pool.getResource();
         this.idKey = "id";
         this.urlKey = "url:";
     }
