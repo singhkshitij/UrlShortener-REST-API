@@ -1,40 +1,21 @@
 package com.beingdev.shortner.repository;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.Protocol;
 
 @Repository
 public class URLRepository {
     private final Jedis jedis;
     private final String idKey;
     private final String urlKey;
-    private JedisPool pool;
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
     public URLRepository() {
     	
-    	try {
-    	    URI redisURI = new URI(System.getenv("REDISTOGO_URL"));
-    	    		pool = new JedisPool(new JedisPoolConfig(),
-    	            redisURI.getHost(),
-    	            redisURI.getPort(),
-    	            Protocol.DEFAULT_TIMEOUT,
-    	            redisURI.getUserInfo().split(":",2)[1]);
-            		
-    	} catch (URISyntaxException e) {
-    	    LOGGER.error("Failed to create redis pool");
-    	    e.printStackTrace();
-    	}
-    	this.jedis = pool.getResource();
-    	pool.close();
+    	this.jedis = new Jedis();
         this.idKey = "id";
         this.urlKey = "url:";
     }
