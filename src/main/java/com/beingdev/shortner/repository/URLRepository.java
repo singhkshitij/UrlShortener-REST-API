@@ -2,15 +2,9 @@ package com.beingdev.shortner.repository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
-import com.beingdev.shortner.bean.SpringConfig;
-
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 @Repository
 public class URLRepository {
@@ -21,9 +15,7 @@ public class URLRepository {
 
     public URLRepository() {
 
-    	final ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-        JedisPool pool = ctx.getBean(JedisPool.class);
-    	this.jedis = pool.getResource();
+    	this.jedis = new Jedis();
         this.idKey = "id";
         this.urlKey = "url:";
     }
