@@ -45,7 +45,7 @@ public class URLController {
         String redirectUrlString = urlConverterService.getLongURLFromID(id);
         LOGGER.info("Original URL: " + redirectUrlString);
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://" + redirectUrlString);
+        redirectView.setUrl(redirectUrlString);
         return redirectView;
     }
 }
