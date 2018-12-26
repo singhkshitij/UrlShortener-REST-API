@@ -31,7 +31,6 @@ public class URLConverterService {
     public String getLongURLFromID(String uniqueID) throws Exception {
         Long dictionaryKey = IDConverter.getDictionaryKeyFromUniqueID(uniqueID);
         String longUrl = urlRepository.getUrl(dictionaryKey);
-        urlRepository.exportdBData();
         LOGGER.info("Converting shortened URL back to {}", longUrl);
         return longUrl;
     }
@@ -44,6 +43,8 @@ public class URLConverterService {
             sb.append(addressComponents[i]);
         }
         sb.append('/');
+        sb.append('/');
+        
         return sb.toString();
     }
 

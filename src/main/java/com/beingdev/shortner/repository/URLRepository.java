@@ -46,9 +46,5 @@ public class URLRepository {
         }
         return url;
     }
-    
-    public String exportdBData() throws Exception {
-    	LOGGER.info("Retrieved Data :" + String.join(",",jedis.keys("?")));
-    	return String.join(",",jedis.keys("*"));
-    }
+   
 }
