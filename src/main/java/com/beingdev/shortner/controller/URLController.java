@@ -31,6 +31,7 @@ public class URLController {
         String longUrl = shortenRequest.getUrl();
         if (URLValidator.INSTANCE.validateURL(longUrl)) {
             String localURL = request.getRequestURL().toString();
+            LOGGER.info("Local URL: " + localURL);
             String shortenedUrl = urlConverterService.shortenURL(localURL, shortenRequest.getUrl());
             LOGGER.info("Shortened url to: " + shortenedUrl);
             return shortenedUrl;

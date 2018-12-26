@@ -1,5 +1,10 @@
 package com.beingdev.shortner.service;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +41,18 @@ public class URLConverterService {
     }
 
     private String formatLocalURLFromShortener(String localURL) {
-        String[] addressComponents = localURL.split("/");
-        // remove the endpoint (last index)
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < addressComponents.length - 1; ++i) {
-            sb.append(addressComponents[i]);
-        }
-        sb.append('/');
-        sb.append('/');
-        
-        return sb.toString();
+    	LOGGER.info("Local URL received: " + localURL);
+    	String domain = "";
+    	try {
+			URL uri = new URL(localURL);
+			domain = uri.getProtocol() + "://" + uri.getAuthority() + "/";
+			LOGGER.info("Domain Name: " + domain);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+        return domain;
     }
 
 }
