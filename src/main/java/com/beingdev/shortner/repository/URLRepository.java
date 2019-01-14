@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPoolConfig;
 
 @Repository
 public class URLRepository {
@@ -17,7 +18,6 @@ public class URLRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
     public URLRepository() throws URISyntaxException {
-    	
     	String redistogoUrl = System.getenv("REDISTOGO_URL");
     	URI uri = new URI(redistogoUrl);
     	
