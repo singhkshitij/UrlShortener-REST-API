@@ -24,6 +24,11 @@ public class URLController {
     public URLController(URLConverterService urlConverterService) {
         this.urlConverterService = urlConverterService;
     }
+    
+    @RequestMapping(value = "/initservice", method =RequestMethod.GET, consumes = {"application/json"})
+    public boolean initREST() {
+    	return true;
+    }
 
     @RequestMapping(value = "/shortener", method=RequestMethod.POST, consumes = {"application/json"})
     public String shortenUrl(@RequestBody @Valid final ShortenRequest shortenRequest, HttpServletRequest request) throws Exception {
