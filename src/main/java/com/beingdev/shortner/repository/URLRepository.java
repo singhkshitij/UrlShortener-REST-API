@@ -1,5 +1,8 @@
 package com.beingdev.shortner.repository;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -13,9 +16,12 @@ public class URLRepository {
     private final String urlKey;
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
-    public URLRepository() {
-
-    	this.jedis = new Jedis();
+    public URLRepository() throws URISyntaxException {
+    	
+    	String redistogoUrl = System.getenv("REDISTOGO_URL");
+    	URI uri = new URI(redistogoUrl);
+    	
+    	this.jedis = new Jedis(uri);
         this.idKey = "id";
         this.urlKey = "url:";
     }
