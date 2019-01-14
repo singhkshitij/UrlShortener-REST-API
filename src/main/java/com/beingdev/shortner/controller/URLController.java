@@ -25,7 +25,7 @@ public class URLController {
         this.urlConverterService = urlConverterService;
     }
     
-    @RequestMapping(value = "/", method =RequestMethod.GET, consumes = {"application/json"})
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String initREST() {
     	return "Welcome to CHOOTU REST API";
     }
