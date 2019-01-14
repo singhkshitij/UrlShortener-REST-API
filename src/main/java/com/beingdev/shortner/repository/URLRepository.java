@@ -21,7 +21,7 @@ public class URLRepository {
     	String redistogoUrl = System.getenv("REDISTOGO_URL");
     	URI uri = new URI(redistogoUrl);
     	
-    	this.jedis = new Jedis(uri, 0);
+    	this.jedis = new Jedis(uri, 0, 0);
     	
         this.idKey = "id";
         this.urlKey = "url:";
