@@ -25,9 +25,9 @@ public class URLController {
         this.urlConverterService = urlConverterService;
     }
     
-    @RequestMapping(value = "/initservice", method =RequestMethod.GET, consumes = {"application/json"})
-    public boolean initREST() {
-    	return true;
+    @RequestMapping(value = "/", method =RequestMethod.GET, consumes = {"application/json"})
+    public String initREST() {
+    	return "Welcome to CHOOTU REST API";
     }
 
     @RequestMapping(value = "/shortener", method=RequestMethod.POST, consumes = {"application/json"})
