@@ -27,7 +27,7 @@ public class URLController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String initREST() {
-    	return "Welcome to CHOOTU REST API";
+    	return "<center><h2>Welcome to CHOOTU REST API</h2></center>";
     }
 
     @RequestMapping(value = "/shortener", method=RequestMethod.POST, consumes = {"application/json"})
