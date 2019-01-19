@@ -1,16 +1,14 @@
 package com.beingdev.shortner.repository;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.beingdev.shortner.config.SpringConfig;
+
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.Protocol;
 
 @Repository
 public class URLRepository {
@@ -21,14 +19,7 @@ public class URLRepository {
 
     public URLRepository() throws URISyntaxException {
         
-    	URI redisURI = new URI(System.getenv("REDISTOGO_URL"));
-    	JedisPool pool = new JedisPool(new JedisPoolConfig(),
-                redisURI.getHost(),
-                redisURI.getPort(),
-                0,
-                redisURI.getUserInfo().split(":",2)[1]);
-    	
-    	this.jedis = pool.getResource();
+    	this.jedis = new SpringConfig().getJedisPool().getResource();
     	
         this.idKey = "id";
         this.urlKey = "url:";
