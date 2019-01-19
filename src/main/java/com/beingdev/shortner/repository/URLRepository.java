@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.Protocol;
 
 @Repository
 public class URLRepository {
@@ -18,14 +20,15 @@ public class URLRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
     public URLRepository() throws URISyntaxException {
+        
+    	URI redisURI = new URI(System.getenv("REDISTOGO_URL"));
+    	JedisPool pool = new JedisPool(new JedisPoolConfig(),
+                redisURI.getHost(),
+                redisURI.getPort(),
+                Protocol.DEFAULT_TIMEOUT,
+                redisURI.getUserInfo().split(":",2)[1]);
     	
-    	JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setMaxTotal(1);
-    	
-    	String redistogoUrl = System.getenv("REDISTOGO_URL");
-    	URI uri = new URI(redistogoUrl);
-    	
-    	this.jedis = new Jedis(uri);
+    	this.jedis = pool.getResource();
     	
         this.idKey = "id";
         this.urlKey = "url:";
