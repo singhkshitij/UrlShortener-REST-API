@@ -18,6 +18,10 @@ public class URLRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(URLRepository.class);
 
     public URLRepository() throws URISyntaxException {
+    	
+    	JedisPoolConfig poolConfig = new JedisPoolConfig();
+        poolConfig.setMaxTotal(1);
+    	
     	String redistogoUrl = System.getenv("REDISTOGO_URL");
     	URI uri = new URI(redistogoUrl);
     	
