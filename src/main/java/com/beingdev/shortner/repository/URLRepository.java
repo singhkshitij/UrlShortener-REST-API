@@ -25,7 +25,7 @@ public class URLRepository {
     	JedisPool pool = new JedisPool(new JedisPoolConfig(),
                 redisURI.getHost(),
                 redisURI.getPort(),
-                Protocol.DEFAULT_TIMEOUT,
+                0,
                 redisURI.getUserInfo().split(":",2)[1]);
     	
     	this.jedis = pool.getResource();
