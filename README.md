@@ -2,6 +2,8 @@
 
 A Java based API Service built with Spring Boot, and Redis and deployed on Heroku.
 
+[![Heroku App Status](https://heroku-shields.herokuapp.com/chootu-rest-api)](https://chootu-rest-api.herokuapp.com)
+
 ### How to run locally  !
 - Prerequisites : 
     - A local redis instance instance should be up and running before running our service. 
