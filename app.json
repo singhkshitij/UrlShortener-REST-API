@@ -1,0 +1,7 @@
+{
+  "name": "UrlShortener REST API",
+  "description": "A Java based API Service built with Spring Boot, and Redis and deployed on Heroku.",
+  "repository": "https://github.com/singhkshitij/UrlShortener-REST-API",
+  "logo": "https://github.com/singhkshitij/Chootu/blob/gh-pages/favicon.ico",
+  "keywords": ["spring boot", "redis", "java"]
+}
