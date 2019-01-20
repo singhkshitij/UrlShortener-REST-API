@@ -60,7 +60,7 @@ $ heroku config
 #You should get the similar output
 REDIS_URL: redis://h:asdfqwer1234asdf@ec2-111-1-1-1.compute-1.amazonaws.com:111
 ```
-- If you get the following output. Voila your redis is up and running. You can try hitting the api endpoints now. 
+- If you get the following output. Voila your REST API is up and running with full functionality enabled. You can try hitting the api endpoints now. 
 ##### How Heroku Works ?
 
 > After pushing code to the remote repository named Heroku, the build process is triggered. Given that the project has a pom.xml, Heroku recognizes it as a Java application. Spring Boot has an embedded Tomcat. Therefore, it can be started up as a JAR file and will work as a web server.
