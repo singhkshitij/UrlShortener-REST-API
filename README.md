@@ -33,9 +33,6 @@ Heroku login.
 ```
 - Once it is done, the steps are straightforward
 ```sh
-#Download an empty spring boot application
-curl https://start.spring.io/starter.tgz -d style=web -d style=actuator -d name=heroku-example | tar -xzvf -
- 
 git init
 git add .
 git commit -m "initial commit"
