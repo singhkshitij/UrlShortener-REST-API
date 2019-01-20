@@ -13,7 +13,7 @@ import redis.clients.jedis.JedisPoolConfig;
 public class SpringConfig {
 
     @Bean
-    public static JedisPool getJedisPool() {
+    public JedisPool getJedisPool() {
         try {
             URI redisURI = new URI(System.getenv("REDIS_URL"));
             
