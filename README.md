@@ -60,6 +60,12 @@ $ heroku config
 #You should get the similar output
 REDIS_URL: redis://h:asdfqwer1234asdf@ec2-111-1-1-1.compute-1.amazonaws.com:111
 ```
+- Note : Now the most important step is to disable connection pool timout for redis instance otherwise our pool get terminated by default after 5 min. 
+- on console type 
+```sh
+heroku redis:timeout redis-elliptical-39032 --seconds 0
+```
+- Here redis-elliptical-39032 is redis instance name.
 - If you get the following output. Voila your REST API is up and running with full functionality enabled. You can try hitting the api endpoints now. 
 ##### How Heroku Works ?
 
