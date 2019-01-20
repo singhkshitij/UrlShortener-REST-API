@@ -26,7 +26,7 @@ reJedis = new redis();
 ### How to deploy on Heroku !
 
 - Create a Heroku account.
-- Install the [Heroku CLI](https//devcenter.heroku.com/articles/heroku-command-line).
+- Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line).
 - Set up Heroku locally using your 
 ```sh 
 Heroku login. 
