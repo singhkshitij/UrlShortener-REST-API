@@ -50,8 +50,9 @@ public class URLRepository {
 	}
 
 	public boolean isCustomUrlAvailable(Long customUrlId) {
+		LOGGER.info("Inside isCustomUrlAvailable" + customUrlId);
 		if (reJedis.hget(urlKey, "url:" + customUrlId) == null) {
-			LOGGER.debug("Inside if of isCustomURLAvailable");
+			LOGGER.info("Inside if of isCustomURLAvailable");
 			return true;
 		}
 		return false;

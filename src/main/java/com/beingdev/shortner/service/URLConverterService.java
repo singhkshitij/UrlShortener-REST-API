@@ -36,6 +36,8 @@ public class URLConverterService {
 	}
 
 	private String createUniqueIDStoreUrl(String customUrl, String longUrl, Long customUrlId, Long id) {
+		LOGGER.info("Inside createUniqueIDStoreUrl");
+		LOGGER.info(customUrl + " : " + longUrl + " : " + customUrlId + " : " + id);
 		if (isCustomUrl && urlRepository.isCustomUrlAvailable(customUrlId)) {
 			saveURL(customUrlId, longUrl);
 			return IDConverter.createUniqueID(customUrlId);
