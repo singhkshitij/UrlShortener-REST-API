@@ -38,10 +38,10 @@ public class URLConverterService {
 		try {
 			uri = new URL(longUrl);
 			protocol = uri.getProtocol();
-			urlToSave = protocol + "://" + uri.getAuthority() + "/";
+			urlToSave = protocol + "://" + uri.getAuthority();
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			urlToSave = "http://" + uri.getAuthority() + "/";
+			urlToSave = "http://" + longUrl;
 		}
 		LOGGER.info("URL Saving in dB {}", urlToSave);
     	urlRepository.saveUrl("url:"+id, urlToSave);
