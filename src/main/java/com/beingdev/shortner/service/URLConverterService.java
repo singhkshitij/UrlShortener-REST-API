@@ -26,7 +26,7 @@ public class URLConverterService {
 		Long id = urlRepository.incrementID();
 		Long customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
 
-		LOGGER.info("Custom Url ID : ", customUrlId , " Normal Url ID : ", id);
+		LOGGER.info("Custom Url ID : " + customUrlId + " Normal Url ID : " + id);
 		
 		if (urlRepository.validateCustomUrl(customUrl, customUrlId)) {
 			saveURL(customUrlId, longUrl);
