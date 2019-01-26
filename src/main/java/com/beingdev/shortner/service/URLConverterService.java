@@ -48,7 +48,7 @@ public class URLConverterService {
 	}
 
 	private boolean isCustomUrlSent(String customUrl, Long id) {
-		if (!customUrl.equals(null)) {
+		if (customUrl != null) {
 			this.customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
 			LOGGER.debug("Custom Url ID : " + this.customUrlId + " Normal Url ID : " + id);
 			return true;
