@@ -43,6 +43,7 @@ public class URLConverterService {
 			// TODO Auto-generated catch block
 			urlToSave = "http://" + uri.getAuthority() + "/";
 		}
+		LOGGER.info("URL Saving in dB {}", urlToSave);
     	urlRepository.saveUrl("url:"+id, urlToSave);
     }
 
