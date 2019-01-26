@@ -30,15 +30,14 @@ public class URLConverterService {
 		String uniqueID;
 		String baseString = formatLocalURLFromShortener(localURL);
 
-		isCustomUrl = isCustomUrlSent(customUrl, customUrlId, id);
+		isCustomUrl = isCustomUrlSent(customUrl, id);
 		uniqueID = createUniqueIDStoreUrl(customUrl, longUrl, customUrlId, id);
 
 		return baseString + uniqueID;
 	}
 
 	private String createUniqueIDStoreUrl(String customUrl, String longUrl, Long customUrlId, Long id) {
-		LOGGER.info("Inside createUniqueIDStoreUrl");
-		LOGGER.info(customUrl + " : " + longUrl + " : " + customUrlId + " : " + id);
+		LOGGER.debug(customUrl + " : " + longUrl + " : " + customUrlId + " : " + id);
 		if (isCustomUrl && urlRepository.isCustomUrlAvailable(customUrlId)) {
 			saveURL(customUrlId, longUrl);
 			return IDConverter.createUniqueID(customUrlId);
@@ -48,10 +47,10 @@ public class URLConverterService {
 		}
 	}
 
-	private boolean isCustomUrlSent(String customUrl, Long customUrlId, Long id) {
+	private boolean isCustomUrlSent(String customUrl, Long id) {
 		if (!customUrl.equals(null)) {
 			this.customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
-			LOGGER.info("Custom Url ID : " + customUrlId + " Normal Url ID : " + id);
+			LOGGER.debug("Custom Url ID : " + this.customUrlId + " Normal Url ID : " + id);
 			return true;
 		}
 		return false;
