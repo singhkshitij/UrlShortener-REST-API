@@ -23,14 +23,26 @@ public class URLConverterService {
         this.urlRepository = urlRepository;
     }
 
-    public String shortenURL(String localURL, String longUrl) {
+    public String shortenURL(String localURL, String longUrl) throws MalformedURLException {
         LOGGER.info("Shortening {}", longUrl);
         Long id = urlRepository.incrementID();
+        saveURL(id, longUrl);
         String uniqueID = IDConverter.createUniqueID(id);
-        urlRepository.saveUrl("url:"+id, longUrl);
         String baseString = formatLocalURLFromShortener(localURL);
         String shortenedURL = baseString + uniqueID;
         return shortenedURL;
+    }
+    
+    public void saveURL(Long id,String longUrl) throws MalformedURLException {
+    	String urlToSave;
+    	URL uri = new URL(longUrl);
+    	String protocol = uri.getProtocol();
+    	if(protocol.equals(null)) {
+    		urlToSave = "http://" + uri.getAuthority() + "/";
+		}else {
+			urlToSave = uri.getProtocol() + "://" + uri.getAuthority() + "/";
+		}
+    	urlRepository.saveUrl("url:"+id, urlToSave);
     }
 
     public String getLongURLFromID(String uniqueID) throws Exception {
@@ -45,12 +57,7 @@ public class URLConverterService {
     	String domain = "";
     	try {
 			URL uri = new URL(localURL);
-			String protocol = uri.getProtocol();
-			if(protocol.equals(null)) {
-				domain = "http://" + uri.getAuthority() + "/";
-			}else {
-				domain = uri.getProtocol() + "://" + uri.getAuthority() + "/";
-			}
+			domain = uri.getProtocol() + "://" + uri.getAuthority() + "/";
 			LOGGER.info("Domain Name: " + domain);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
