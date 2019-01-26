@@ -16,7 +16,8 @@ public class URLConverterService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(URLConverterService.class);
 	private final URLRepository urlRepository;
 	private boolean isCustomUrl;
-
+	private Long customUrlId = null;
+	
 	@Autowired
 	public URLConverterService(URLRepository urlRepository) {
 		this.urlRepository = urlRepository;
@@ -25,7 +26,7 @@ public class URLConverterService {
 	public String shortenURL(String localURL, String longUrl, String customUrl) {
 		LOGGER.info("Shortening {}", longUrl);
 		Long id = urlRepository.incrementID();
-		Long customUrlId = null;
+		
 		String uniqueID;
 		String baseString = formatLocalURLFromShortener(localURL);
 
@@ -49,7 +50,7 @@ public class URLConverterService {
 
 	private boolean isCustomUrlSent(String customUrl, Long customUrlId, Long id) {
 		if (!customUrl.equals(null)) {
-			customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
+			this.customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
 			LOGGER.info("Custom Url ID : " + customUrlId + " Normal Url ID : " + id);
 			return true;
 		}
