@@ -26,6 +26,7 @@ public class URLConverterService {
 		LOGGER.info("Shortening {}", longUrl);
 		Long id = urlRepository.incrementID();
 		Long customUrlId = null;
+		String uniqueID;
 		
 		if (!customUrl.equals(null)) {
 			customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
@@ -34,11 +35,14 @@ public class URLConverterService {
 		}
 		
 		if (isCustomUrl && urlRepository.isCustomUrlAvailable(customUrlId)) {
+			LOGGER.info("Inside CustomUrl Block");
 			saveURL(customUrlId, longUrl);
+			uniqueID = IDConverter.createUniqueID(customUrlId);
 		} else {
+			LOGGER.info("Inside CustomUrl Block");
 			saveURL(id, longUrl);
+			uniqueID = IDConverter.createUniqueID(id);
 		}
-		String uniqueID = IDConverter.createUniqueID(id);
 		String baseString = formatLocalURLFromShortener(localURL);
 		String shortenedURL = baseString + uniqueID;
 		return shortenedURL;
@@ -73,7 +77,7 @@ public class URLConverterService {
 		try {
 			URL uri = new URL(localURL);
 			domain = uri.getProtocol() + "://" + uri.getAuthority() + "/";
-			LOGGER.info("Domain Name: " + domain);
+			LOGGER.debug("Domain Name: " + domain);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

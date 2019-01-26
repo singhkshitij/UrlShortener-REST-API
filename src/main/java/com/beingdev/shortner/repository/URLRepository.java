@@ -30,19 +30,19 @@ public class URLRepository {
 
 	public Long incrementID() {
 		Long id = reJedis.incr(idKey);
-		LOGGER.info("Incrementing ID: {}", id - 1);
+		LOGGER.debug("Incrementing ID: {}", id - 1);
 		return id - 1;
 	}
 
 	public void saveUrl(String key, String longUrl) {
-		LOGGER.info("Saving: {} at {}", longUrl, key);
+		LOGGER.debug("Saving: {} at {}", longUrl, key);
 		reJedis.hset(urlKey, key, longUrl);
 	}
 
 	public String getUrl(Long id) throws Exception {
 		LOGGER.info("Retrieving at {}", id);
 		String url = reJedis.hget(urlKey, "url:" + id);
-		LOGGER.info("Retrieved {} at {}", url, id);
+		LOGGER.debug("Retrieved {} at {}", url, id);
 		if (url == null) {
 			throw new Exception("URL at key" + id + " does not exist");
 		}
