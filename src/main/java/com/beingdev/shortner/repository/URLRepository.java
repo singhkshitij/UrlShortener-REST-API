@@ -50,7 +50,7 @@ public class URLRepository {
 	}
 
 	public boolean isCustomUrlAvailable(Long customUrlId) {
-		if(reJedis.exists(customUrlId.toString())) {
+		if (reJedis.exists("url:" + customUrlId)) {
 			return true;
 		}
 		return false;
