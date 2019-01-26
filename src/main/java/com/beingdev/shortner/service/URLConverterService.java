@@ -15,6 +15,7 @@ import com.beingdev.shortner.utils.IDConverter;
 public class URLConverterService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(URLConverterService.class);
 	private final URLRepository urlRepository;
+	private boolean isCustomUrl;
 
 	@Autowired
 	public URLConverterService(URLRepository urlRepository) {
@@ -24,11 +25,15 @@ public class URLConverterService {
 	public String shortenURL(String localURL, String longUrl, String customUrl) {
 		LOGGER.info("Shortening {}", longUrl);
 		Long id = urlRepository.incrementID();
-		Long customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
-
-		LOGGER.info("Custom Url ID : " + customUrlId + " Normal Url ID : " + id);
+		Long customUrlId = null;
 		
-		if (urlRepository.validateCustomUrl(customUrl, customUrlId)) {
+		if (!customUrl.equals(null)) {
+			customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
+			LOGGER.info("Custom Url ID : " + customUrlId + " Normal Url ID : " + id);
+			isCustomUrl = true;
+		}
+		
+		if (isCustomUrl && urlRepository.isCustomUrlAvailable(customUrlId)) {
 			saveURL(customUrlId, longUrl);
 		} else {
 			saveURL(id, longUrl);

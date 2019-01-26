@@ -49,7 +49,10 @@ public class URLRepository {
 		return url;
 	}
 
-	public boolean validateCustomUrl(String customUrl, Long customUrlId) {
+	public boolean isCustomUrlAvailable(Long customUrlId) {
+		if(reJedis.exists(customUrlId.toString())) {
+			return true;
+		}
 		return false;
 	}
 }
