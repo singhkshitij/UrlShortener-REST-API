@@ -41,7 +41,7 @@ public class URLController {
 		String longUrl = shortenRequest.getUrl();
 		String customUrl = shortenRequest.getCustomUrl();
 
-		LOGGER.info("Received urls to shorten : ", longUrl, " and Custom Url : ", customUrl);
+		LOGGER.info("Received urls to shorten : " + longUrl + " and Custom Url : " + customUrl);
 
 		if (URLValidator.INSTANCE.validateURL(longUrl)) {
 			String localURL = request.getRequestURL().toString();
