@@ -51,19 +51,19 @@ public class URLConverterService {
 			// TODO Auto-generated catch block
 			urlToSave = "http://" + longUrl;
 		}
-		LOGGER.info("URL Saving in dB {}", urlToSave);
+		LOGGER.debug("URL Saving in dB {}", urlToSave);
 		urlRepository.saveUrl("url:" + id, urlToSave);
 	}
 
 	public String getLongURLFromID(String uniqueID) throws Exception {
 		Long dictionaryKey = IDConverter.getDictionaryKeyFromUniqueID(uniqueID);
 		String longUrl = urlRepository.getUrl(dictionaryKey);
-		LOGGER.info("Converting shortened URL back to {}", longUrl);
+		LOGGER.debug("Converting shortened URL back to {}", longUrl);
 		return longUrl;
 	}
 
 	private String formatLocalURLFromShortener(String localURL) {
-		LOGGER.info("Local URL received: " + localURL);
+		LOGGER.debug("Local URL received: " + localURL);
 		String domain = "";
 		try {
 			URL uri = new URL(localURL);
