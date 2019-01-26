@@ -50,7 +50,7 @@ public class URLConverterService {
 	private boolean isCustomUrlSent(String customUrl, Long id) {
 		if (customUrl != null) {
 			this.customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
-			LOGGER.debug("Custom Url ID : " + this.customUrlId + " Normal Url ID : " + id);
+			LOGGER.debug("Custom Url ID : {} Normal Url ID : {}" , this.customUrlId , id);
 			return true;
 		}
 		return false;
@@ -63,7 +63,7 @@ public class URLConverterService {
 		try {
 			uri = new URL(longUrl);
 			protocol = uri.getProtocol();
-			urlToSave = protocol + "://" + uri.getAuthority();
+			urlToSave = protocol + "://" + uri.getAuthority() + uri.getFile();
 		} catch (MalformedURLException e) {
 			urlToSave = "http://" + longUrl;
 		}
