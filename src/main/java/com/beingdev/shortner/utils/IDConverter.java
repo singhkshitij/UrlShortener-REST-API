@@ -92,4 +92,13 @@ public class IDConverter {
         }
         return id;
     }
+    
+    public static Long convertCustomurltoBase10ID(String customUrl) {
+    	
+    	List<Character> base62IDs = new ArrayList<>();
+        for (int i = 0; i < customUrl.length(); ++i) {
+            base62IDs.add(customUrl.charAt(i));
+        }
+    	return convertBase62ToBase10ID(base62IDs);
+    }
 }
