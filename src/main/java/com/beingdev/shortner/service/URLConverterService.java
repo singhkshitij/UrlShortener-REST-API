@@ -27,25 +27,31 @@ public class URLConverterService {
 		Long id = urlRepository.incrementID();
 		Long customUrlId = null;
 		String uniqueID;
-		
+		String baseString = formatLocalURLFromShortener(localURL);
+
+		isCustomUrl = isCustomUrlSent(customUrl, customUrlId, id);
+		uniqueID = createUniqueIDStoreUrl(customUrl, longUrl, customUrlId, id);
+
+		return baseString + uniqueID;
+	}
+
+	private String createUniqueIDStoreUrl(String customUrl, String longUrl, Long customUrlId, Long id) {
+		if (isCustomUrl && urlRepository.isCustomUrlAvailable(customUrlId)) {
+			saveURL(customUrlId, longUrl);
+			return IDConverter.createUniqueID(customUrlId);
+		} else {
+			saveURL(id, longUrl);
+			return IDConverter.createUniqueID(id);
+		}
+	}
+
+	private boolean isCustomUrlSent(String customUrl, Long customUrlId, Long id) {
 		if (!customUrl.equals(null)) {
 			customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
 			LOGGER.info("Custom Url ID : " + customUrlId + " Normal Url ID : " + id);
-			isCustomUrl = true;
+			return true;
 		}
-		
-		if (isCustomUrl && urlRepository.isCustomUrlAvailable(customUrlId)) {
-			LOGGER.info("Inside CustomUrl Block");
-			saveURL(customUrlId, longUrl);
-			uniqueID = IDConverter.createUniqueID(customUrlId);
-		} else {
-			LOGGER.info("Inside new Block");
-			saveURL(id, longUrl);
-			uniqueID = IDConverter.createUniqueID(id);
-		}
-		String baseString = formatLocalURLFromShortener(localURL);
-		String shortenedURL = baseString + uniqueID;
-		return shortenedURL;
+		return false;
 	}
 
 	public void saveURL(Long id, String longUrl) {
@@ -57,7 +63,6 @@ public class URLConverterService {
 			protocol = uri.getProtocol();
 			urlToSave = protocol + "://" + uri.getAuthority();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			urlToSave = "http://" + longUrl;
 		}
 		LOGGER.debug("URL Saving in dB {}", urlToSave);
