@@ -39,7 +39,7 @@ public class URLConverterService {
 			saveURL(customUrlId, longUrl);
 			uniqueID = IDConverter.createUniqueID(customUrlId);
 		} else {
-			LOGGER.info("Inside CustomUrl Block");
+			LOGGER.info("Inside new Block");
 			saveURL(id, longUrl);
 			uniqueID = IDConverter.createUniqueID(id);
 		}
