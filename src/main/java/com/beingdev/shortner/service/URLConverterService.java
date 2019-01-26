@@ -1,8 +1,6 @@
 package com.beingdev.shortner.service;
 
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.slf4j.Logger;
@@ -23,7 +21,7 @@ public class URLConverterService {
         this.urlRepository = urlRepository;
     }
 
-    public String shortenURL(String localURL, String longUrl) throws MalformedURLException {
+    public String shortenURL(String localURL, String longUrl) {
         LOGGER.info("Shortening {}", longUrl);
         Long id = urlRepository.incrementID();
         saveURL(id, longUrl);
@@ -33,14 +31,17 @@ public class URLConverterService {
         return shortenedURL;
     }
     
-    public void saveURL(Long id,String longUrl) throws MalformedURLException {
+    public void saveURL(Long id,String longUrl) {
     	String urlToSave;
-    	URL uri = new URL(longUrl);
-    	String protocol = uri.getProtocol();
-    	if(protocol.equals(null)) {
-    		urlToSave = "http://" + uri.getAuthority() + "/";
-		}else {
-			urlToSave = uri.getProtocol() + "://" + uri.getAuthority() + "/";
+    	URL uri = null ;
+    	String protocol;
+		try {
+			uri = new URL(longUrl);
+			protocol = uri.getProtocol();
+			urlToSave = protocol + "://" + uri.getAuthority() + "/";
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			urlToSave = "http://" + uri.getAuthority() + "/";
 		}
     	urlRepository.saveUrl("url:"+id, urlToSave);
     }
