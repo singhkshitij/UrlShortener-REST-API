@@ -45,7 +45,12 @@ public class URLConverterService {
     	String domain = "";
     	try {
 			URL uri = new URL(localURL);
-			domain = uri.getProtocol() + "://" + uri.getAuthority() + "/";
+			String protocol = uri.getProtocol();
+			if(protocol.equals(null)) {
+				domain = "http://" + uri.getAuthority() + "/";
+			}else {
+				domain = uri.getProtocol() + "://" + uri.getAuthority() + "/";
+			}
 			LOGGER.info("Domain Name: " + domain);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
