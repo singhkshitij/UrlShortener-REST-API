@@ -3,7 +3,7 @@
 A Java based API Service built with Spring Boot, and Redis and deployed on Heroku.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-[![Heroku App Status](https://heroku-shields.herokuapp.com/chootu-rest-api)](https://chootu-rest-api.herokuapp.com)
+[![Heroku App Status](https://heroku-shields.herokuapp.com/chootu-rest-api)](https://www.chtu.ml)
 
 ### How to run locally  !
 - Prerequisites : 
