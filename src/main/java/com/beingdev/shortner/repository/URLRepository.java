@@ -1,5 +1,8 @@
 package com.beingdev.shortner.repository;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -59,7 +62,17 @@ public class URLRepository {
 	}
 	
 	public String getTotalKeys() {
-		return reJedis.info("Stats");
+		String extractedKeys = reJedis.info("Stats");
+		String regex = "\\bkeyspace_hits:\\b\\+?\\d+";
 		
+		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+	    Matcher matcher = pattern.matcher(extractedKeys);
+	    
+	    if (matcher.find()) {
+	    	  String[] keyValue = matcher.group().split(":");
+	    	  return keyValue[1];
+	    } else {
+	    	return "0";
+	    }
 	}
 }
