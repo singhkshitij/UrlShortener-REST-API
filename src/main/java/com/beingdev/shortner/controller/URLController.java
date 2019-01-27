@@ -63,4 +63,10 @@ public class URLController {
 		redirectView.setUrl(redirectUrlString);
 		return redirectView;
 	}
+	
+	@RequestMapping(value = "/hits", method = RequestMethod.GET)
+	public String getTotalHits(){
+		LOGGER.info("Get total Number of hits");
+		return urlConverterService.getHits();
+	}
 }

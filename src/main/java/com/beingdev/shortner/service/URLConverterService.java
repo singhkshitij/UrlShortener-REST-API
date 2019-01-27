@@ -92,5 +92,9 @@ public class URLConverterService {
 
 		return domain;
 	}
+	
+	public String getHits() {
+		return urlRepository.getTotalKeys();
+	}
 
 }

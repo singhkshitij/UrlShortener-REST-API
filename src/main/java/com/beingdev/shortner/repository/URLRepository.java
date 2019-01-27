@@ -57,4 +57,9 @@ public class URLRepository {
 		}
 		return false;
 	}
+	
+	public String getTotalKeys() {
+		return reJedis.info("keyspace_hits");
+		
+	}
 }
