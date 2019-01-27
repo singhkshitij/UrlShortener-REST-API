@@ -17,7 +17,7 @@ public class URLConverterService {
 	private final URLRepository urlRepository;
 	private boolean isCustomUrl;
 	private Long customUrlId = null;
-	
+
 	@Autowired
 	public URLConverterService(URLRepository urlRepository) {
 		this.urlRepository = urlRepository;
@@ -26,7 +26,7 @@ public class URLConverterService {
 	public String shortenURL(String localURL, String longUrl, String customUrl) {
 		LOGGER.info("Shortening {}", longUrl);
 		Long id = urlRepository.incrementID();
-		
+
 		String uniqueID;
 		String baseString = formatLocalURLFromShortener(localURL);
 
@@ -50,7 +50,7 @@ public class URLConverterService {
 	private boolean isCustomUrlSent(String customUrl, Long id) {
 		if (customUrl != null) {
 			this.customUrlId = IDConverter.convertCustomurltoBase10ID(customUrl);
-			LOGGER.debug("Custom Url ID : {} Normal Url ID : {}" , this.customUrlId , id);
+			LOGGER.debug("Custom Url ID : {} Normal Url ID : {}", this.customUrlId, id);
 			return true;
 		}
 		return false;
@@ -92,7 +92,7 @@ public class URLConverterService {
 
 		return domain;
 	}
-	
+
 	public String getHits() {
 		return urlRepository.getTotalKeys();
 	}
