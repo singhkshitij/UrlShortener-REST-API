@@ -67,6 +67,8 @@ public class URLController {
 	@RequestMapping(value = "/hits", method = RequestMethod.GET)
 	public String getTotalHits(){
 		LOGGER.info("Get total Number of hits");
-		return urlConverterService.getHits();
+		String hits =  urlConverterService.getHits();
+		LOGGER.info("total Number of hits {}", hits);
+		return hits;
 	}
 }
