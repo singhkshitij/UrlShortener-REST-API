@@ -59,7 +59,7 @@ public class URLRepository {
 	}
 	
 	public String getTotalKeys() {
-		return reJedis.info("keyspace_hits");
+		return reJedis.info();
 		
 	}
 }
