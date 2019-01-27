@@ -68,7 +68,7 @@ public class URLController {
 	public String getTotalHits() {
 		LOGGER.info("Get total Number of hits");
 		String hits = urlConverterService.getHits();
-		LOGGER.info("total Number of hits {}", hits);
+		LOGGER.debug("total Number of hits {}", hits);
 		return hits;
 	}
 }
